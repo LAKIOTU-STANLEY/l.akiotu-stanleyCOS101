@@ -1,1 +1,1 @@
-C:\Users\HP\Documents\l.akiotu-stanleyCOS101\week_6\practice_9\target\debug\practice_9.exe: C:\Users\HP\Documents\l.akiotu-stanleyCOS101\week_6\practice_9\src\main.rs
+C:\Users\HP\Documents\l.akiotu-stanleyCOS101\week_6\Practices\practice_9\target\debug\practice_9.exe: C:\Users\HP\Documents\l.akiotu-stanleyCOS101\week_6\Practices\practice_9\src\main.rs
