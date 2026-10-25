@@ -1,23 +1,40 @@
-use::std::io::Write;
+use std::fs;
+use std::io::Write;
+
 
 fn main() {
-    let commissioner = vec!["Aigbogun Alamba Daudu","Murtala Afeez Bendu","Okorocha Calistus Ogbona","Adewale Jimoh Akanbi","Osazuwa Faith Etieye"];
+    let file1 = fs::read_to_string("Commissioners.csv").unwrap();
+    let mut commissioners = Vec::new();
+    for line in file1.lines() {
+        commissioners.push(line.trim_end_matches(',').to_string());
+    }
 
-    let ministry = vec!["Internal Affairs","Justice","Defense","Power & Steel","Petroleum"];
 
-    let zone = vec!["South West","North East","South South","South West","South East"];
+    let file2 = fs::read_to_string("Ministry.csv").unwrap();
+    let mut ministry = Vec::new();
+    for line in file2.lines() {
+        ministry.push(line.trim_end_matches(',').to_string());
+    }
 
-    let mut file = std::fs::File::create("EFCC_Convicted_Ministers_Merge.csv").expect("Create failed");
 
-    let header = "Commissioner,Minintry,Zone\n";
-    println!("{}",header);
-    file.write_all(header.as_bytes()).expect("Write failed");
+    let file3 = fs::read_to_string("Zone.csv").unwrap();
+    let mut zone = Vec::new();
+    for line in file3.lines() {
+        zone.push(line.trim_end_matches(',').to_string());
+    }
 
-    for i in 0..commissioner.len()
-{
-    let line = commissioner[i].to_string() + "," + ministry[i] + "," + zone[i] + "\n";
-    println!("{}",line);
-    file.write_all(line.as_bytes()).expect("Write failed");
-}
-    println!("\nAll Commissioners have been saved to file");
+    let mut merged = Vec::new();
+
+    for i in 0..commissioners.len() {
+        let record = commissioners[i].to_string() + "," + &ministry[i] + "," + &zone[i] + "\n";
+        merged.push(record);
+    }
+
+    let mut file = fs::File::create("EFCC_Convicted_Commissioners_Merge.csv").unwrap();
+
+    for record in &merged {
+        file.write_all(record.as_bytes()).unwrap();
+    }
+
+    println!("All Commissioners been to file");
 }
